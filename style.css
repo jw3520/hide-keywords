@@ -141,16 +141,21 @@ header p {
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .text-panel label {
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 0; /* Handled by panel-header */
   display: block;
 }
 
 .clear-btn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
+  /* No absolute positioning here, it's part of flex flow */
 }
 
 .clear-btn:hover {
@@ -165,8 +170,7 @@ textarea {
   flex: 1;
   width: 100%;
   padding: 10px;
-  padding-top: 40px; /* Add padding to avoid text overlapping with clear button */
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-color); /* Removed padding-top here */
   border-radius: 4px;
   resize: none; /* We control size via flex */
   font-family: monospace;

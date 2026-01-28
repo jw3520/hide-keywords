@@ -61,7 +61,13 @@ header p {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.config-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .rule-row {
@@ -82,24 +88,27 @@ header p {
   font-weight: bold;
 }
 
-#add-rule-btn {
+.icon-btn {
   background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 50%;
   width: 32px;
   height: 32px;
-  font-size: 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
   transition: background-color 0.2s;
+  padding: 0;
 }
 
-#add-rule-btn:hover {
+.icon-btn:hover {
   background-color: #357abd;
+}
+
+.icon-btn .material-icons {
+  font-size: 20px;
 }
 
 /* Editor Section */
@@ -111,6 +120,7 @@ header p {
 }
 
 .text-panel {
+  position: relative;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -127,10 +137,29 @@ header p {
   display: block;
 }
 
+.clear-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  color: #999;
+  width: 24px;
+  height: 24px;
+}
+
+.clear-btn:hover {
+  background-color: rgba(0,0,0,0.1);
+}
+
+.clear-btn .material-icons {
+  font-size: 18px;
+}
+
 textarea {
   flex: 1;
   width: 100%;
   padding: 10px;
+  padding-top: 30px; /* Add padding to avoid text overlapping with clear button */
   border: 1px solid var(--border-color);
   border-radius: 4px;
   resize: none; /* We control size via flex */

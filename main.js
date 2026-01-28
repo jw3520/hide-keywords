@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     newRow.classList.add('rule-row');
     newRow.dataset.index = rowCount;
     newRow.innerHTML = `
-      <input type="text" class="target-input" placeholder="바꿀 문장 (Target)">
+      <input type="text" class="target-input" placeholder="바꿀 키워드">
       <span class="arrow">→</span>
-      <input type="text" class="replacement-input" placeholder="바뀔 문장 (Replacement)">
+      <input type="text" class="replacement-input" placeholder="바뀔 키워드">
     `;
     rulesContainer.appendChild(newRow);
     setupRowListeners(newRow);
@@ -54,29 +54,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setupRowListeners(rowElement = null) {
-    const targetInputs = rowElement 
-      ? [rowElement.querySelector('.target-input')] 
+    const targetInputs = rowElement
+      ? [rowElement.querySelector('.target-input')]
       : document.querySelectorAll('.target-input');
 
     targetInputs.forEach(input => {
-      // Avoid adding double listeners if we re-run specific ones, but here we scope or run once.
-      // If passing rowElement, we handle just that one.
-      
       input.addEventListener('input', (e) => {
         const row = e.target.closest('.rule-row');
         const index = parseInt(row.dataset.index, 10);
         const replacementInput = row.querySelector('.replacement-input');
 
         // Auto-fill logic
-        // Only if replacement is currently empty to avoid overwriting user edits
-        if (replacementInput.value === '') {
-           if (index === 0 && e.target.value.trim() !== '') {
-             replacementInput.value = 'AAAA';
-           } else if (index === 1 && e.target.value.trim() !== '') {
-             replacementInput.value = 'BBBB';
-           }
+        if (e.target.value.trim() !== '' && replacementInput.value === '') {
+          const char = String.fromCharCode(65 + index); // A, B, C...
+          replacementInput.value = char.repeat(4);
         }
-        
+
         // Trigger text processing when rules change
         processText();
       });

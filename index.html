@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Keyword Hider</title>
+  <title>Keyword Replacer</title>
   <link href='./style.css' rel='stylesheet'>
 </head>
 <body>
   <div class="app-container">
     <header>
-      <h1>Keyword Hider & Replacer</h1>
+      <h1>Keyword Replacer</h1>
       <p>좌측에 텍스트를 입력하면 설정된 규칙에 따라 변환되어 우측에 표시됩니다.</p>
     </header>
 
@@ -17,19 +17,19 @@
       <div id="rules-container">
         <!-- Rules will be injected here or statically defined initially -->
         <div class="rule-row" data-index="0">
-          <input type="text" class="target-input" placeholder="바꿀 문장 (Target)">
+          <input type="text" class="target-input" placeholder="바꿀 키워드">
           <span class="arrow">→</span>
-          <input type="text" class="replacement-input" placeholder="바뀔 문장 (Replacement)">
+          <input type="text" class="replacement-input" placeholder="바뀔 키워드">
         </div>
         <div class="rule-row" data-index="1">
-          <input type="text" class="target-input" placeholder="바꿀 문장 (Target)">
+          <input type="text" class="target-input" placeholder="바꿀 키워드">
           <span class="arrow">→</span>
-          <input type="text" class="replacement-input" placeholder="바뀔 문장 (Replacement)">
+          <input type="text" class="replacement-input" placeholder="바뀔 키워드">
         </div>
         <div class="rule-row" data-index="2">
-          <input type="text" class="target-input" placeholder="바꿀 문장 (Target)">
+          <input type="text" class="target-input" placeholder="바꿀 키워드">
           <span class="arrow">→</span>
-          <input type="text" class="replacement-input" placeholder="바뀔 문장 (Replacement)">
+          <input type="text" class="replacement-input" placeholder="바뀔 키워드">
         </div>
       </div>
       <button id="add-rule-btn" class="icon-btn" title="규칙 추가">+</button>

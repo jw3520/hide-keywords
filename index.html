@@ -35,8 +35,10 @@
       </div>
       <div class="config-buttons">
         <button id="add-rule-btn" class="icon-btn" title="규칙 추가"><i class="material-icons">add</i></button>
-        <button id="clear-rules-btn" class="icon-btn" title="모든 규칙 지우기"><i class="material-icons">delete_sweep</i></button>
-        <button id="swap-rules-btn" class="icon-btn" title="규칙 반전"><i class="material-icons">swap_horiz</i></button>
+        <div>
+          <button id="clear-rules-btn" class="icon-btn" title="모든 규칙 지우기"><i class="material-icons">refresh</i></button>
+          <button id="swap-rules-btn" class="icon-btn" title="규칙 반전"><i class="material-icons">swap_horiz</i></button>
+        </div>
       </div>
     </section>
 
@@ -44,7 +46,7 @@
       <div class="text-panel">
         <label for="input-text">입력 (Input)</label>
         <textarea id="input-text" maxlength="10000" placeholder="여기에 텍스트를 입력하세요 (최대 10,000자)..."></textarea>
-        <button id="clear-input-btn" class="clear-btn icon-btn" title="입력 내용 지우기"><i class="material-icons">close</i></button>
+        <button id="clear-input-btn" class="clear-btn icon-btn" title="입력 내용 지우기"><i class="material-icons">refresh</i></button>
         <div class="char-count"><span id="char-current">0</span> / 10000</div>
       </div>
       <div class="text-panel">

@@ -51,8 +51,7 @@ header p {
 #config-section {
   position: relative;
   background: var(--panel-bg);
-  padding: 15px;
-  padding-bottom: 25px; /* Space for the add button */
+  padding: 50px 15px 15px 15px; /* Increased padding-top for top-right buttons */
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   margin-bottom: 20px;
@@ -63,11 +62,12 @@ header p {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 20px; /* Push rules down to clear top-right buttons */
 }
 
 #add-rule-btn {
   position: absolute;
-  bottom: -16px;
+  bottom: 15px; /* Position inside the section */
   left: 50%;
   transform: translateX(-50%);
 }

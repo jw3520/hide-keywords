@@ -66,7 +66,12 @@ header p {
 
 .config-buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.config-buttons div {
+  display: flex;
   gap: 10px;
 }
 

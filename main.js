@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   const rulesContainer = document.getElementById('rules-container');
   const addRuleBtn = document.getElementById('add-rule-btn');
+  const clearRulesBtn = document.getElementById('clear-rules-btn');
+  const swapRulesBtn = document.getElementById('swap-rules-btn');
   const inputText = document.getElementById('input-text');
   const outputText = document.getElementById('output-text');
   const charCurrent = document.getElementById('char-current');
+  const clearInputBtn = document.getElementById('clear-input-btn');
 
   // Initial setup for existing rows
   setupRowListeners();
@@ -21,7 +24,36 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     rulesContainer.appendChild(newRow);
     setupRowListeners(newRow);
-    // Trigger update in case we want to support empty rules? No, empty rules do nothing.
+  });
+
+  // Clear all rules
+  clearRulesBtn.addEventListener('click', () => {
+    const rows = document.querySelectorAll('.rule-row');
+    rows.forEach(row => {
+      row.querySelector('.target-input').value = '';
+      row.querySelector('.replacement-input').value = '';
+    });
+    processText();
+  });
+
+  // Swap all rules
+  swapRulesBtn.addEventListener('click', () => {
+    const rows = document.querySelectorAll('.rule-row');
+    rows.forEach(row => {
+      const targetInput = row.querySelector('.target-input');
+      const replacementInput = row.querySelector('.replacement-input');
+      const temp = targetInput.value;
+      targetInput.value = replacementInput.value;
+      replacementInput.value = temp;
+    });
+    processText();
+  });
+
+  // Clear input text
+  clearInputBtn.addEventListener('click', () => {
+    inputText.value = '';
+    processText();
+    updateCharCount();
   });
 
   // Input text processing
@@ -44,8 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const replacement = row.querySelector('.replacement-input').value;
 
       if (target) {
-        // Global replace of all occurrences using split/join or replaceAll
-        // replaceAll is standard in modern browsers
         text = text.replaceAll(target, replacement);
       }
     });
@@ -64,13 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const index = parseInt(row.dataset.index, 10);
         const replacementInput = row.querySelector('.replacement-input');
 
-        // Auto-fill logic
         if (e.target.value.trim() !== '' && replacementInput.value === '') {
           const char = String.fromCharCode(65 + index); // A, B, C...
           replacementInput.value = char.repeat(4);
         }
 
-        // Trigger text processing when rules change
         processText();
       });
     });

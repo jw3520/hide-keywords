@@ -7,9 +7,46 @@ document.addEventListener('DOMContentLoaded', () => {
   const outputText = document.getElementById('output-text');
   const charCurrent = document.getElementById('char-current');
   const clearInputBtn = document.getElementById('clear-input-btn');
+  const copyOutputBtn = document.getElementById('copy-output-btn');
 
   // Initial setup for existing rows
   setupRowListeners();
+
+  // Copy output text
+  copyOutputBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(outputText.value)
+      .then(() => {
+        // Optional: Provide feedback (like changing the icon or a toast message)
+        const originalIcon = copyOutputBtn.innerHTML;
+        copyOutputBtn.innerHTML = '<i class="material-icons">check</i>';
+        showToast('내용이 복사되었습니다.');
+        setTimeout(() => {
+          copyOutputBtn.innerHTML = originalIcon;
+        }, 2000);
+      })
+      .catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+  });
+
+  function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // Trigger reflow to apply transition
+    setTimeout(() => {
+      toast.classList.add('show');
+    }, 10);
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => {
+        document.body.removeChild(toast);
+      }, 300);
+    }, 3000);
+  }
 
   // Add new rule row
   addRuleBtn.addEventListener('click', () => {
@@ -47,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
       replacementInput.value = temp;
     });
     processText();
+    showToast('키워드가 스왑되었습니다.');
   });
 
   // Clear input text

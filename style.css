@@ -189,6 +189,11 @@ textarea:focus {
   margin-top: 5px;
 }
 
+.char-count.limit-exceeded {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
 @media (max-width: 768px) {
   #editor-container {
     flex-direction: column;

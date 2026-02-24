@@ -47,7 +47,7 @@
           <button id="clear-input-btn" class="clear-btn icon-btn" title="초기화"><i class="material-icons">refresh</i></button>
         </div>
         <textarea id="input-text" maxlength="10000" placeholder="여기에 텍스트를 입력하세요 (최대 10,000자)..."></textarea>
-        <div class="char-count"><span id="char-current">0</span> / 10000</div>
+        <div class="char-count" id="input-char-container"><span id="char-current">0</span> / 10,000자</div>
       </div>
       <div class="text-panel">
         <div class="panel-header">
@@ -55,7 +55,7 @@
           <button id="copy-output-btn" class="icon-btn" title="복사"><i class="material-icons">content_copy</i></button>
         </div>
         <textarea id="output-text" readonly placeholder="변환된 결과가 여기에 표시됩니다..."></textarea>
-        <div class="char-count"><span id="output-char-current">0</span> / 10000</div>
+        <div class="char-count" id="output-char-container"><span id="output-char-current">0</span> / 10,000자</div>
       </div>
     </main>
   </div>

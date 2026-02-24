@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputText = document.getElementById('input-text');
   const outputText = document.getElementById('output-text');
   const charCurrent = document.getElementById('char-current');
-  const outputCharCount = document.getElementById('output-char-count');
+  const outputCharCurrent = document.getElementById('output-char-current');
   const clearInputBtn = document.getElementById('clear-input-btn');
   const copyOutputBtn = document.getElementById('copy-output-btn');
 
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateCharCount() {
     charCurrent.textContent = inputText.value.length;
-    outputCharCount.textContent = outputText.value.length;
+    outputCharCurrent.textContent = outputText.value.length;
   }
 
   function processText() {

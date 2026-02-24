@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputText = document.getElementById('input-text');
   const outputText = document.getElementById('output-text');
   const charCurrent = document.getElementById('char-current');
+  const outputCharCount = document.getElementById('output-char-count');
   const clearInputBtn = document.getElementById('clear-input-btn');
   const copyOutputBtn = document.getElementById('copy-output-btn');
 
@@ -101,8 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function updateCharCount() {
-    const len = inputText.value.length;
-    charCurrent.textContent = len;
+    charCurrent.textContent = inputText.value.length;
+    outputCharCount.textContent = outputText.value.length;
   }
 
   function processText() {
@@ -119,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     outputText.value = text;
+    updateCharCount();
   }
 
   function setupRowListeners(rowElement = null) {

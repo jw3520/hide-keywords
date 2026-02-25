@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const clearRulesBtn = document.getElementById('clear-rules-btn');
   const swapRulesBtn = document.getElementById('swap-rules-btn');
   const inputText = document.getElementById('input-text');
-  const outputText = document.getElementById('output-text');
+  const outputTextView = document.getElementById('output-text-view');
   const charCurrent = document.getElementById('char-current');
   const outputCharCurrent = document.getElementById('output-char-current');
   const inputCharContainer = document.getElementById('input-char-container');
@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial setup for existing rows
   setupRowListeners();
 
-  // Copy output text
+  // Copy output text (Strip HTML by using innerText)
   copyOutputBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(outputText.value)
+    navigator.clipboard.writeText(outputTextView.innerText)
       .then(() => {
         const originalIcon = copyOutputBtn.innerHTML;
         copyOutputBtn.innerHTML = '<i class="material-icons">check</i>';
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateCharCount() {
     const inputLen = inputText.value.length;
-    const outputLen = outputText.value.length;
+    const outputLen = outputTextView.innerText.length;
     const limit = 10000;
 
     charCurrent.textContent = inputLen.toLocaleString();
@@ -119,25 +119,45 @@ document.addEventListener('DOMContentLoaded', () => {
     // Output styling
     if (outputLen > limit) {
       outputCharContainer.classList.add('limit-exceeded');
-      outputText.classList.add('limit-exceeded');
+      outputTextView.classList.add('limit-exceeded');
     } else {
       outputCharContainer.classList.remove('limit-exceeded');
-      outputText.classList.remove('limit-exceeded');
+      outputTextView.classList.remove('limit-exceeded');
     }
   }
 
   function processText() {
-    let text = inputText.value;
+    let rawText = inputText.value;
     const rows = document.querySelectorAll('.rule-row');
-    rows.forEach(row => {
+    
+    // To prevent nested span issues, we escape HTML and then replace
+    let processedHtml = escapeHtml(rawText);
+
+    rows.forEach((row, index) => {
       const target = row.querySelector('.target-input').value;
       const replacement = row.querySelector('.replacement-input').value;
+      const colorClass = `hl-${index % 6}`;
+
       if (target) {
-        text = text.replaceAll(target, replacement);
+        const escapedTarget = escapeRegExp(escapeHtml(target));
+        const regex = new RegExp(escapedTarget, 'g');
+        const highlightedReplacement = `<span class="${colorClass}">${escapeHtml(replacement)}</span>`;
+        processedHtml = processedHtml.replace(regex, highlightedReplacement);
       }
     });
-    outputText.value = text;
+
+    outputTextView.innerHTML = processedHtml;
     updateCharCount();
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
   function setupRowListeners(rowElement = null) {

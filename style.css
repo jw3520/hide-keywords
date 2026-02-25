@@ -165,16 +165,45 @@ header p {
   font-size: 18px;
 }
 
-textarea {
+/* Highlight Colors */
+.hl-0 { background-color: #ffeaa7; color: #d35400; padding: 2px 4px; border-radius: 3px; font-weight: bold; }
+.hl-1 { background-color: #fab1a0; color: #c0392b; padding: 2px 4px; border-radius: 3px; font-weight: bold; }
+.hl-2 { background-color: #74b9ff; color: #2980b9; padding: 2px 4px; border-radius: 3px; font-weight: bold; }
+.hl-3 { background-color: #55efc4; color: #009432; padding: 2px 4px; border-radius: 3px; font-weight: bold; }
+.hl-4 { background-color: #a29bfe; color: #6c5ce7; padding: 2px 4px; border-radius: 3px; font-weight: bold; }
+.hl-5 { background-color: #fdcb6e; color: #e67e22; padding: 2px 4px; border-radius: 3px; font-weight: bold; }
+
+.target-input {
+  border-left: 5px solid #ccc; /* Default */
+}
+
+/* Dynamic Border for Inputs */
+.rule-row[data-index="0"] .target-input { border-left-color: #ffeaa7; }
+.rule-row[data-index="1"] .target-input { border-left-color: #fab1a0; }
+.rule-row[data-index="2"] .target-input { border-left-color: #74b9ff; }
+.rule-row[data-index="3"] .target-input { border-left-color: #55efc4; }
+.rule-row[data-index="4"] .target-input { border-left-color: #a29bfe; }
+.rule-row[data-index="5"] .target-input { border-left-color: #fdcb6e; }
+
+textarea, #output-text-view {
   flex: 1;
   width: 100%;
   padding: 10px;
-  border: 1px solid var(--border-color); /* Removed padding-top here */
+  border: 1px solid var(--border-color);
   border-radius: 4px;
-  resize: none; /* We control size via flex */
+  resize: none;
   font-family: monospace;
   font-size: 14px;
   line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-y: auto;
+  background: white;
+}
+
+#output-text-view:empty:before {
+  content: attr(placeholder);
+  color: #aaa;
 }
 
 textarea:focus {

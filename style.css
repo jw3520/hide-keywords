@@ -240,6 +240,12 @@ footer p {
   margin: 0;
 }
 
+.last-update {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-top: 4px !important;
+}
+
 .footer-links {
   display: flex;
   align-items: center;

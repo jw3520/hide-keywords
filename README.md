@@ -1,6 +1,8 @@
 # 🔍 Keyword Replacer (키워드 변환기)
 
 > **사내 AI 활용 보안 가이드라인 준수를 위한 민감 정보 마스킹 도구**
+>
+> 🚀 **실시간 서비스 접속:** [https://hide-keywords.pages.dev/](https://hide-keywords.pages.dev/)
 
 사내에서 외부 LLM(ChatGPT, Claude 등) 및 AI 툴을 사용할 때 발생할 수 있는 대외비 유출 등 보안 이슈를 예방하기 위한 웹 서비스입니다. 현재 AI 거버넌스나 그라운드룰이 확립되기 전 단계에서, 사용자가 주요 키워드를 수동으로 마스킹하거나 치환하여 안전하게 AI를 활용할 수 있도록 돕습니다.
 
@@ -35,6 +37,7 @@
 이 프로젝트는 최신 CI/CD 환경에서 운영됩니다.
 
 - **Infrastructure:** [Cloudflare Pages](https://pages.cloudflare.com/)
+- **Live URL:** [https://hide-keywords.pages.dev/](https://hide-keywords.pages.dev/)
 - **Deployment:** `main` 브랜치에 코드 Push 시 Cloudflare를 통해 자동으로 빌드 및 글로벌 에지 네트워크에 배포됩니다.
 
 ---
@@ -42,7 +45,7 @@
 ## 🛠 기술 스택
 
 - **Frontend:** HTML5, CSS3, Vanilla JavaScript
-- **Deployment:** Cloudflare Pages, GitHub Actions (optional)
+- **Deployment:** Cloudflare Pages
 - **Icons/Fonts:** Material Icons, Apple SD Gothic Neo
 
 ---

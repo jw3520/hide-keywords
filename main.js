@@ -115,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
     charCurrent.textContent = inputLen.toLocaleString();
     outputCharCurrent.textContent = outputLen.toLocaleString();
 
-    // Input styling
     if (inputLen > limit) {
       inputCharContainer.classList.add('limit-exceeded');
       inputText.classList.add('limit-exceeded');
@@ -124,7 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
       inputText.classList.remove('limit-exceeded');
     }
 
-    // Output styling
     if (outputLen > limit) {
       outputCharContainer.classList.add('limit-exceeded');
       outputTextView.classList.add('limit-exceeded');
@@ -135,26 +133,46 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function processText() {
-    let rawText = inputText.value;
+    const rawText = inputText.value;
     const rows = document.querySelectorAll('.rule-row');
     
-    // To prevent nested span issues, we escape HTML and then replace
-    let processedHtml = escapeHtml(rawText);
+    // 1. Build a map of targets to their replacement and color
+    const replacementMap = new Map();
+    const targets = [];
 
     rows.forEach((row, index) => {
       const target = row.querySelector('.target-input').value;
       const replacement = row.querySelector('.replacement-input').value;
-      const colorClass = `hl-${index % 6}`;
-
       if (target) {
-        const escapedTarget = escapeRegExp(escapeHtml(target));
-        const regex = new RegExp(escapedTarget, 'g');
-        const highlightedReplacement = `<span class="${colorClass}">${escapeHtml(replacement)}</span>`;
-        processedHtml = processedHtml.replace(regex, highlightedReplacement);
+        replacementMap.set(target, {
+          text: replacement,
+          colorClass: `hl-${index % 6}`
+        });
+        targets.push(escapeRegExp(target));
       }
     });
 
-    outputTextView.innerHTML = processedHtml;
+    if (targets.length === 0) {
+      outputTextView.textContent = rawText;
+      updateCharCount();
+      return;
+    }
+
+    // 2. Create a single regex with all targets joined by |
+    // Sort by length descending to match longest possible keywords first
+    targets.sort((a, b) => b.length - a.length);
+    const combinedRegex = new RegExp(targets.join('|'), 'g');
+
+    // 3. Replace in one pass
+    const processedHtml = rawText.replace(combinedRegex, (match) => {
+      const info = replacementMap.get(match);
+      return `<span class="${info.colorClass}">${escapeHtml(info.text)}</span>`;
+    });
+
+    // 4. Update view (we need to preserve newlines, so we escape the rest)
+    // Note: rawText.replace already worked on the plain text.
+    // We just need to make sure the final string is safe for innerHTML.
+    outputTextView.innerHTML = processedHtml.replace(/\n/g, '<br>');
     updateCharCount();
   }
 

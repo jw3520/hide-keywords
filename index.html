@@ -15,29 +15,35 @@
     </header>
 
     <section id="config-section">
-      <div id="rules-container">
-        <!-- Rules will be injected here or statically defined initially -->
-        <div class="rule-row" data-index="0">
-          <input type="text" class="target-input" placeholder="바꿀 키워드">
-          <span class="arrow">→</span>
-          <input type="text" class="replacement-input" placeholder="바뀔 키워드">
-        </div>
-        <div class="rule-row" data-index="1">
-          <input type="text" class="target-input" placeholder="바꿀 키워드">
-          <span class="arrow">→</span>
-          <input type="text" class="replacement-input" placeholder="바뀔 키워드">
-        </div>
-        <div class="rule-row" data-index="2">
-          <input type="text" class="target-input" placeholder="바꿀 키워드">
-          <span class="arrow">→</span>
-          <input type="text" class="replacement-input" placeholder="바뀔 키워드">
-        </div>
+      <div class="section-header">
+        <h2>변환 규칙 설정</h2>
+        <button id="toggle-rules-btn" class="text-btn">규칙 숨기기</button>
       </div>
-      <div class="config-buttons-top-right">
-        <button id="swap-rules-btn" class="icon-btn" title="키워드 스왑"><i class="material-icons">swap_horiz</i></button>
-        <button id="clear-rules-btn" class="icon-btn" title="초기화"><i class="material-icons">refresh</i></button>
+      <div id="rules-wrapper">
+        <div id="rules-container">
+          <!-- Rules will be injected here or statically defined initially -->
+          <div class="rule-row" data-index="0">
+            <input type="text" class="target-input" placeholder="바꿀 키워드">
+            <span class="arrow">→</span>
+            <input type="text" class="replacement-input" placeholder="바뀔 키워드">
+          </div>
+          <div class="rule-row" data-index="1">
+            <input type="text" class="target-input" placeholder="바꿀 키워드">
+            <span class="arrow">→</span>
+            <input type="text" class="replacement-input" placeholder="바뀔 키워드">
+          </div>
+          <div class="rule-row" data-index="2">
+            <input type="text" class="target-input" placeholder="바꿀 키워드">
+            <span class="arrow">→</span>
+            <input type="text" class="replacement-input" placeholder="바뀔 키워드">
+          </div>
+        </div>
+        <div class="config-buttons-top-right">
+          <button id="swap-rules-btn" class="icon-btn" title="키워드 스왑"><i class="material-icons">swap_horiz</i></button>
+          <button id="clear-rules-btn" class="icon-btn" title="초기화"><i class="material-icons">refresh</i></button>
+        </div>
+        <button id="add-rule-btn" class="icon-btn" title="키워드 추가"><i class="material-icons">add</i></button>
       </div>
-      <button id="add-rule-btn" class="icon-btn" title="키워드 추가"><i class="material-icons">add</i></button>
     </section>
 
     <main id="editor-container">

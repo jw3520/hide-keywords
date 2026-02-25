@@ -11,6 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const outputCharContainer = document.getElementById('output-char-container');
   const clearInputBtn = document.getElementById('clear-input-btn');
   const copyOutputBtn = document.getElementById('copy-output-btn');
+  const toggleRulesBtn = document.getElementById('toggle-rules-btn');
+  const rulesWrapper = document.getElementById('rules-wrapper');
+
+  // Rules Toggle Logic
+  toggleRulesBtn.addEventListener('click', () => {
+    const isCollapsed = rulesWrapper.classList.toggle('collapsed');
+    toggleRulesBtn.textContent = isCollapsed ? '규칙 보기' : '규칙 숨기기';
+  });
 
   // Initial setup for existing rows
   setupRowListeners();

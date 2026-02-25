@@ -51,30 +51,62 @@ header p {
 #config-section {
   position: relative;
   background: var(--panel-bg);
-  padding: 40px 15px 15px 15px; /* Adjusted padding-top */
+  padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   margin-bottom: 20px;
   border: 1px solid var(--border-color);
 }
 
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.section-header h2 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #444;
+}
+
+.text-btn {
+  background: none;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+#rules-wrapper {
+  transition: max-height 0.3s ease-out, opacity 0.3s;
+  overflow: hidden;
+}
+
+#rules-wrapper.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+}
+
 #rules-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 10px; /* Adjusted margin-top */
 }
 
 #add-rule-btn {
-  /* Removed absolute positioning */
-  margin: 10px auto 0 auto; /* Center-align below rules container */
+  margin: 10px auto 0 auto;
   display: block;
 }
 
 .config-buttons-top-right {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 50px; /* Shifted for toggle btn */
   display: flex;
   gap: 10px;
 }
@@ -125,7 +157,7 @@ header p {
   display: flex;
   gap: 20px;
   flex: 1;
-  min-height: 0; /* Important for nested flex scrolling */
+  min-height: 0;
 }
 
 .text-panel {
@@ -149,12 +181,8 @@ header p {
 
 .text-panel label {
   font-weight: bold;
-  margin-bottom: 0; /* Handled by panel-header */
+  margin-bottom: 0;
   display: block;
-}
-
-.clear-btn {
-  /* No absolute positioning here, it's part of flex flow */
 }
 
 .clear-btn:hover {
@@ -174,10 +202,9 @@ header p {
 .hl-5 { background-color: #fdcb6e; color: #e67e22; padding: 2px 4px; border-radius: 3px; font-weight: bold; }
 
 .target-input {
-  border-left: 5px solid #ccc; /* Default */
+  border-left: 5px solid #ccc;
 }
 
-/* Dynamic Border for Inputs */
 .rule-row[data-index="0"] .target-input { border-left-color: #ffeaa7; }
 .rule-row[data-index="1"] .target-input { border-left-color: #fab1a0; }
 .rule-row[data-index="2"] .target-input { border-left-color: #74b9ff; }
@@ -277,18 +304,75 @@ footer p {
 }
 
 @media (max-width: 768px) {
+  .app-container {
+    padding: 10px;
+    height: auto; /* Allow scrolling on mobile */
+  }
+
+  body {
+    height: auto;
+    overflow-y: auto;
+  }
+
+  header h1 {
+    font-size: 1.3rem;
+  }
+
+  #config-section {
+    padding: 12px;
+  }
+
+  .rule-row {
+    flex-wrap: wrap;
+    background: #fcfcfc;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #eee;
+    gap: 5px;
+  }
+
+  .rule-row input {
+    flex: 1 1 100%;
+    font-size: 16px; /* Prevent zoom */
+    padding: 10px;
+  }
+
+  .rule-row .arrow {
+    width: 100%;
+    text-align: center;
+    margin: 2px 0;
+  }
+
   #editor-container {
     flex-direction: column;
+    gap: 15px;
   }
   
   .text-panel {
-    min-height: 300px;
+    min-height: 400px;
+    padding: 12px;
+  }
+
+  textarea, #output-text-view {
+    font-size: 16px;
+  }
+
+  .icon-btn {
+    width: 40px;
+    height: 40px;
   }
 
   footer {
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     text-align: center;
+    padding: 20px 0;
+  }
+
+  .config-buttons-top-right {
+    position: static;
+    justify-content: center;
+    margin-bottom: 10px;
   }
 }
 

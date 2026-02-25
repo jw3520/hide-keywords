@@ -10,7 +10,7 @@
 
 ## 📺 프로젝트 시연
 > **Note:** 아래는 실제 동작 화면입니다.
-![Keyword Replacer Demo](https://via.placeholder.com/800x450.png?text=Keyword+Replacer+Demo+Screenshot)
+![Keyword Replacer Demo](./image.png)
 
 ---
 

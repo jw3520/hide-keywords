@@ -1,0 +1,15 @@
+# IDE / Editor
+.vscode/
+.idx/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Dependencies (Just in case)
+node_modules/
+dist/
+build/

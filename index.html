@@ -17,7 +17,13 @@
     <section id="config-section">
       <div class="section-header">
         <h2>변환 규칙 설정</h2>
-        <button id="toggle-rules-btn" class="text-btn">규칙 숨기기</button>
+        <div class="header-actions">
+          <button id="toggle-rules-btn" class="text-btn">규칙 숨기기</button>
+          <div class="config-main-buttons">
+            <button id="swap-rules-btn" class="icon-btn" title="키워드 스왑"><i class="material-icons">swap_horiz</i></button>
+            <button id="clear-rules-btn" class="icon-btn" title="초기화"><i class="material-icons">refresh</i></button>
+          </div>
+        </div>
       </div>
       <div id="rules-wrapper">
         <div id="rules-container">
@@ -37,10 +43,6 @@
             <span class="arrow">→</span>
             <input type="text" class="replacement-input" placeholder="바뀔 키워드">
           </div>
-        </div>
-        <div class="config-buttons-top-right">
-          <button id="swap-rules-btn" class="icon-btn" title="키워드 스왑"><i class="material-icons">swap_horiz</i></button>
-          <button id="clear-rules-btn" class="icon-btn" title="초기화"><i class="material-icons">refresh</i></button>
         </div>
         <button id="add-rule-btn" class="icon-btn" title="키워드 추가"><i class="material-icons">add</i></button>
       </div>

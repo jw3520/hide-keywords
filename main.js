@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial setup for existing rows
   setupRowListeners();
 
-  // Copy output text (Strip HTML by using innerText)
+  // Copy output text (Strip HTML)
   copyOutputBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(outputTextView.innerText)
       .then(() => {
@@ -136,9 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const rawText = inputText.value;
     const rows = document.querySelectorAll('.rule-row');
     
-    // 1. Build a map of targets to their replacement and color
     const replacementMap = new Map();
-    const targets = [];
+    const targetPatterns = [];
 
     rows.forEach((row, index) => {
       const target = row.querySelector('.target-input').value;
@@ -148,31 +147,33 @@ document.addEventListener('DOMContentLoaded', () => {
           text: replacement,
           colorClass: `hl-${index % 6}`
         });
-        targets.push(escapeRegExp(target));
+        targetPatterns.push(escapeRegExp(target));
       }
     });
 
-    if (targets.length === 0) {
+    if (targetPatterns.length === 0) {
       outputTextView.textContent = rawText;
       updateCharCount();
       return;
     }
 
-    // 2. Create a single regex with all targets joined by |
     // Sort by length descending to match longest possible keywords first
-    targets.sort((a, b) => b.length - a.length);
-    const combinedRegex = new RegExp(targets.join('|'), 'g');
+    targetPatterns.sort((a, b) => b.length - a.length);
+    // Use capture group to keep the delimiters in split
+    const combinedRegex = new RegExp(`(${targetPatterns.join('|')})`, 'g');
 
-    // 3. Replace in one pass
-    const processedHtml = rawText.replace(combinedRegex, (match) => {
-      const info = replacementMap.get(match);
-      return `<span class="${info.colorClass}">${escapeHtml(info.text)}</span>`;
-    });
+    // Split and Map strategy: ensures each segment is processed only once
+    const segments = rawText.split(combinedRegex);
+    const resultHtml = segments.map(segment => {
+      if (replacementMap.has(segment)) {
+        const info = replacementMap.get(segment);
+        return `<span class="${info.colorClass}">${escapeHtml(info.text)}</span>`;
+      } else {
+        return escapeHtml(segment).replace(/\n/g, '<br>');
+      }
+    }).join('');
 
-    // 4. Update view (we need to preserve newlines, so we escape the rest)
-    // Note: rawText.replace already worked on the plain text.
-    // We just need to make sure the final string is safe for innerHTML.
-    outputTextView.innerHTML = processedHtml.replace(/\n/g, '<br>');
+    outputTextView.innerHTML = resultHtml;
     updateCharCount();
   }
 
